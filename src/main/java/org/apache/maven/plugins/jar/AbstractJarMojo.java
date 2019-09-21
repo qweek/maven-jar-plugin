@@ -141,6 +141,16 @@ public abstract class AbstractJarMojo
     private boolean skipIfEmpty;
 
     /**
+     * Value like SOURCE_DATE_EPOCH as <a href="https://reproducible-builds.org/specs/source-date-epoch/">defined in
+     * Reproducible Builds</a>: a UNIX timestamp, defined as the number of seconds, excluding leap seconds, since 01 Jan
+     * 1970 00:00:00 UTC.
+     *
+     * @since 3.2.0
+     */
+    @Parameter( name = "source-date-epoch", defaultValue = "${source-date-epoch}" )
+    private int sourceDateEpoch;
+
+    /**
      * Return the specific output directory to serve as the root for the archive.
      * @return get classes directory.
      */
@@ -233,6 +243,7 @@ public abstract class AbstractJarMojo
         }
 
         MavenArchiver archiver = new MavenArchiver();
+        archiver.setCreatedBy( "Maven Jar Plugin", "org.apache.maven.plugins", "maven-jar-plugin" );
 
         if ( containsModuleDescriptor )
         {
@@ -244,6 +255,12 @@ public abstract class AbstractJarMojo
         }
 
         archiver.setOutputFile( jarFile );
+
+        if ( sourceDateEpoch != 0 )
+        {
+            // configure for Reproducible Builds based on source date epoch value
+            archiver.getArchiver().configureReproducible( sourceDateEpoch );
+        }
 
         archive.setForced( forceCreation );
 
