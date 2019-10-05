@@ -141,14 +141,12 @@ public abstract class AbstractJarMojo
     private boolean skipIfEmpty;
 
     /**
-     * Value like SOURCE_DATE_EPOCH as <a href="https://reproducible-builds.org/specs/source-date-epoch/">defined in
-     * Reproducible Builds</a>: a UNIX timestamp, defined as the number of seconds, excluding leap seconds, since 01 Jan
-     * 1970 00:00:00 UTC.
+     * Timestamp for reproducible archive entries.
      *
      * @since 3.2.0
      */
-    @Parameter( name = "source-date-epoch", defaultValue = "${source-date-epoch}" )
-    private int sourceDateEpoch;
+    @Parameter( defaultValue = "${project.build.outputTimestamp}" )
+    private String outputTimestamp;
 
     /**
      * Return the specific output directory to serve as the root for the archive.
@@ -256,11 +254,8 @@ public abstract class AbstractJarMojo
 
         archiver.setOutputFile( jarFile );
 
-        if ( sourceDateEpoch != 0 )
-        {
-            // configure for Reproducible Builds based on source date epoch value
-            archiver.getArchiver().configureReproducible( sourceDateEpoch );
-        }
+        // configure for Reproducible Builds based on outputTimestamp value
+        archiver.configureReproducible( outputTimestamp );
 
         archive.setForced( forceCreation );
 
