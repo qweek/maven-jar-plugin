@@ -76,7 +76,7 @@
 
   <properties>
     <mavenFileManagementVersion>3.0.0</mavenFileManagementVersion>
-    <mavenArchiverVersion>3.4.1-SNAPSHOT</mavenArchiverVersion>
+    <mavenArchiverVersion>3.5.0-SNAPSHOT</mavenArchiverVersion>
     <mavenVersion>3.0</mavenVersion>
     <javaVersion>7</javaVersion>
   </properties>
@@ -133,7 +133,7 @@
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-archiver</artifactId>
-      <version>4.2.0-SNAPSHOT</version>
+      <version>4.2.0</version>
     </dependency>
 	<dependency>
 		<groupId>org.codehaus.plexus</groupId>
