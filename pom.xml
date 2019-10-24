@@ -76,7 +76,7 @@
 
   <properties>
     <mavenFileManagementVersion>3.0.0</mavenFileManagementVersion>
-    <mavenArchiverVersion>3.5.0-SNAPSHOT</mavenArchiverVersion>
+    <mavenArchiverVersion>3.5.0</mavenArchiverVersion>
     <mavenVersion>3.0</mavenVersion>
     <javaVersion>7</javaVersion>
   </properties>
